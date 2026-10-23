@@ -37,19 +37,28 @@ public class MainActivity extends Activity {
                     String packageName = "";
 
                     switch (name) {
-                        case "YouTube":
-                            packageName = "com.google.android.youtube.tv";
-                            break;
-                        case "Netflix":
-                            packageName = "com.netflix.ninja";
-                            break;
-                        case "Music":
-                            packageName = "com.google.android.youtube.tv";
-                            break;
-                        case "Browser":
-                            packageName = "com.google.android.tv.browser";
-                            break;
-                    }
+    case "YouTube":
+        packageName = "com.google.android.youtube.tv";
+        break;
+
+    case "Netflix":
+        packageName = "com.netflix.ninja";
+        break;
+
+    case "Music":
+        packageName = "com.astro.sooka";
+        break;
+
+    case "Browser":
+        packageName = "com.iqiyi.i18n.tv";
+        break;
+
+    case "Settings":
+        startActivity(new Intent(
+            android.provider.Settings.ACTION_SETTINGS
+        ));
+        return;
+}
 
                     if (!packageName.isEmpty()) {
                         Intent intent = getPackageManager()
