@@ -108,7 +108,11 @@ hour: '2-digit', minute: '2-digit'
 });
 }
 function openApp(name) {
-alert(name + ' integration will be added later.');
+    if (window.Android && window.Android.openApp) {
+        window.Android.openApp(name);
+    } else {
+        alert("Android connection not available");
+    }
 }
 updateClock();
 setInterval(updateClock, 30000);
