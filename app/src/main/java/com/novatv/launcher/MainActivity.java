@@ -28,7 +28,38 @@ public class MainActivity extends Activity {
         webView.setFocusable(true);
         webView.setFocusableInTouchMode(true);
 
-        setContentView(webView);
-        webView.loadUrl("file:///android_asset/index.html");
+        webView.addJavascriptInterface(new Object() {
+    @android.webkit.JavascriptInterface
+    public void openApp(String name) {
+        runOnUiThread(() -> {
+            String packageName = "";
+
+            switch (name) {
+                case "YouTube":
+                    packageName = "com.google.android.youtube.tv";
+                    break;
+                case "Netflix":
+                    packageName = "com.netflix.ninja";
+                    break;
+                case "Music":
+                    packageName = "com.google.android.youtube.tv";
+                    break;
+                case "Browser":
+                    packageName = "com.google.android.tv.browser";
+                    break;
+            }
+
+            if (!packageName.isEmpty()) {
+                android.content.Intent intent =
+                    getPackageManager().getLaunchIntentForPackage(packageName);
+
+                if (intent != null) {
+                    startActivity(intent);
+                }
+            }
+        });
     }
-}
+}, "Android");
+
+setContentView(webView);
+webView.loadUrl("file:///android_asset/index.html");
