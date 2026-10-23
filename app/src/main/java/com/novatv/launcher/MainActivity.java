@@ -2,9 +2,11 @@ package com.novatv.launcher;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.content.Intent;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.JavascriptInterface;
 
 public class MainActivity extends Activity {
 
@@ -29,37 +31,39 @@ public class MainActivity extends Activity {
         webView.setFocusableInTouchMode(true);
 
         webView.addJavascriptInterface(new Object() {
-    @android.webkit.JavascriptInterface
-    public void openApp(String name) {
-        runOnUiThread(() -> {
-            String packageName = "";
+            @JavascriptInterface
+            public void openApp(String name) {
+                runOnUiThread(() -> {
+                    String packageName = "";
 
-            switch (name) {
-                case "YouTube":
-                    packageName = "com.google.android.youtube.tv";
-                    break;
-                case "Netflix":
-                    packageName = "com.netflix.ninja";
-                    break;
-                case "Music":
-                    packageName = "com.google.android.youtube.tv";
-                    break;
-                case "Browser":
-                    packageName = "com.google.android.tv.browser";
-                    break;
+                    switch (name) {
+                        case "YouTube":
+                            packageName = "com.google.android.youtube.tv";
+                            break;
+                        case "Netflix":
+                            packageName = "com.netflix.ninja";
+                            break;
+                        case "Music":
+                            packageName = "com.google.android.youtube.tv";
+                            break;
+                        case "Browser":
+                            packageName = "com.google.android.tv.browser";
+                            break;
+                    }
+
+                    if (!packageName.isEmpty()) {
+                        Intent intent = getPackageManager()
+                            .getLaunchIntentForPackage(packageName);
+
+                        if (intent != null) {
+                            startActivity(intent);
+                        }
+                    }
+                });
             }
+        }, "Android");
 
-            if (!packageName.isEmpty()) {
-                android.content.Intent intent =
-                    getPackageManager().getLaunchIntentForPackage(packageName);
-
-                if (intent != null) {
-                    startActivity(intent);
-                }
-            }
-        });
+        setContentView(webView);
+        webView.loadUrl("file:///android_asset/index.html");
     }
-}, "Android");
-
-setContentView(webView);
-webView.loadUrl("file:///android_asset/index.html");
+}
