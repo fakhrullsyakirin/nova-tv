@@ -108,7 +108,24 @@ hour: '2-digit', minute: '2-digit'
 });
 }
 function openApp(name) {
-alert(name + ' integration will be added later.');
+    const apps = {
+        "YouTube": "https://www.youtube.com/tv",
+        "Netflix": "https://www.netflix.com",
+        "Music": "https://music.youtube.com",
+        "Browser": "https://www.google.com",
+        "Settings": "settings"
+    };
+
+    const target = apps[name];
+
+    if (target === "settings") {
+        alert("Untuk Settings, gunakan menu Settings pada Google TV.");
+        return;
+    }
+
+    if (target) {
+        window.location.href = target;
+    }
 }
 updateClock();
 setInterval(updateClock, 30000);
