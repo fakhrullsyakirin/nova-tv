@@ -2,28 +2,32 @@ name: Build NOVA TV APK
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout source
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up JDK
+      - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
 
-      - name: Check source files
-        run: |
-          echo "Checking NOVA TV source"
-          test -f index.html
+      - name: Build APK
+        uses: gradle/gradle-build-action@v3
+        with:
+          gradle-version: '8.9'
+          arguments: assembleDebug
 
-      - name: Upload interface
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: nova-tv-interface
-          path: index.html
+          name: nova-tv-apk
+          path: app/build/outputs/apk/debug/app-debug.apk
