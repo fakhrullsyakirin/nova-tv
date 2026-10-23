@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NOVA TV</title>
+<style>
+* { box-sizing: border-box; }
+body {
+margin: 0;
+padding: 35px;
+min-height: 100vh;
+background: radial-gradient(ellipse at top right,
+#193c68, #0b1b30 50%, #07111f);
+color: #f4f7ff;
+font-family: Arial, sans-serif;
+}
+header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.logo {
+font-size: 28px;
+font-weight: 800;
+letter-spacing: 3px;
+}
+.logo span { color: #7db8ff; }
+#clock { color: #9aacc5; }
+.hero {
+margin-top: 40px;
+padding: 40px;
+min-height: 260px;
+border-radius: 24px;
+background: linear-gradient(110deg, #234a79, #14253d, #101a2c);
+}
+.eyebrow {
+color: #7db8ff;
+letter-spacing: 3px;
+font-size: 13px;
+}
+h1 { font-size: 42px; }
+.hero p { color: #c0cde0; }
+h2 { margin-top: 35px; }
+.apps {
+display: grid;
+grid-template-columns: repeat(5, minmax(80px, 1fr));
+gap: 16px;
+}
+.app {
+padding: 20px 8px;
+border: 2px solid transparent;
+border-radius: 16px;
+background: #14243a;
+color: white;
+font-size: 14px;
+cursor: pointer;
+}
+.app:focus {
+outline: none;
+border-color: #7db8ff;
+background: #203b5c;
+transform: scale(1.05);
+}
+.icon { font-size: 30px; margin-bottom: 12px; }
+@media (max-width: 600px) {
+body { padding: 20px; }
+.apps { grid-template-columns: repeat(3, 1fr); }
+}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">NOVA <span>TV</span></div>
+<div id="clock">--:--</div>
+</header>
+
+<section class="hero">
+<div class="eyebrow">YOUR ENTERTAINMENT HUB</div>
+<h1>Welcome home.</h1>
+<p>Your favourite entertainment, all in one place.</p>
+</section>
+
+<h2>Your applications</h2>
+<div class="apps">
+<button class="app" onclick="openApp('YouTube')">
+<div class="icon">▶️</div>YouTube
+</button>
+<button class="app" onclick="openApp('Netflix')">
+<div class="icon">🎬</div>Netflix
+</button>
+<button class="app" onclick="openApp('Music')">
+<div class="icon">🎵</div>Music
+</button>
+<button class="app" onclick="openApp('Browser')">
+<div class="icon">🌐</div>Browser
+</button>
+<button class="app" onclick="openApp('Settings')">
+<div class="icon">⚙️</div>Settings
+</button>
+</div>
+
+<script>
+function updateClock() {
+document.getElementById('clock').textContent =
+new Date().toLocaleTimeString([], {
+hour: '2-digit', minute: '2-digit'
+});
+}
+function openApp(name) {
+alert(name + ' integration will be added later.');
+}
+updateClock();
+setInterval(updateClock, 30000);
+</script>
+</body>
+  </html>
