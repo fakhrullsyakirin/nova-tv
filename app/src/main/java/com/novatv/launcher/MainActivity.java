@@ -46,9 +46,9 @@ public class MainActivity extends Activity {
         break;
 
     case "Music":
-        packageName = "com.astro.sooka";
-        break;
-
+    packageName = "com.astro.sooka";
+    break;
+                            
     case "Browser":
         packageName = "com.iqiyi.i18n.tv";
         break;
