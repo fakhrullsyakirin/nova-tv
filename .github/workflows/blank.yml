@@ -1,0 +1,35 @@
+name: Build NOVA TV APK
+
+on:
+workflow_dispatch:
+push:
+branches:
+- main
+
+jobs:
+build:
+runs-on: ubuntu-latest
+
+steps:
+- name: Checkout repository
+uses: actions/checkout@v4
+
+- name: Prepare build environment
+run: |
+sudo apt-get update
+sudo apt-get install -y zip unzip
+
+- name: Check project files
+run: |
+echo "NOVA TV repository loaded"
+ls -la
+
+- name: Create source archive
+run: |
+zip -r nova-tv-source.zip index.html README.md
+
+- name: Upload source archive
+uses: actions/upload-artifact@v4
+with:
+name: nova-tv-source
+path: nova-tv-source.zip
