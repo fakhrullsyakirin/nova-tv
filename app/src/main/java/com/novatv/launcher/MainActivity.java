@@ -61,12 +61,19 @@ public class MainActivity extends Activity {
 }
 
                     if (!packageName.isEmpty()) {
-                        Intent intent = getPackageManager()
-                            .getLaunchIntentForPackage(packageName);
+    Intent intent = getPackageManager()
+        .getLaunchIntentForPackage(packageName);
 
-                        if (intent != null) {
-                            startActivity(intent);
-                        }
+    if (intent != null) {
+        startActivity(intent);
+    } else if (name.equals("Music")) {
+        Intent sookaIntent = getPackageManager()
+            .getLaunchIntentForPackage("com.astro.sott");
+
+        if (sookaIntent != null) {
+            startActivity(sookaIntent);
+        }
+    }
                     }
                 });
             }
